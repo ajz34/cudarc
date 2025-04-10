@@ -11,7 +11,7 @@ use std::{
 use anyhow::{Context, Result};
 use bindgen::Builder;
 use lazy_static::lazy_static;
-use reqwest::blocking::{get, Response};
+use reqwest::blocking::{Response, get};
 use serde_json::Value;
 use sha2::{Digest, Sha256};
 
@@ -899,7 +899,6 @@ fn generate_cusolver(
     multi_progress: &MultiProgress,
 ) -> Result<()> {
     let cuda_name = &module.cuda;
-    let filters = &module.filters;
 
     let archive_dir = get_archive(cuda_version, cuda_name, module_name, multi_progress)?;
 
@@ -926,7 +925,8 @@ fn generate_cusolver(
     create_system_folders(
         cuda_version,
         module_name,
-        filters,
+        &module.allowlist,
+        &module.blocklist,
         &archive_dir,
         primary_archives,
     )?;
