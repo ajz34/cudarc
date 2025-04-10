@@ -187,11 +187,12 @@ fn create_modules() -> Vec<(String, ModuleConfig)> {
             "cusparse".to_string(),
             ModuleConfig {
                 cuda: "libcusparse".to_string(),
-                filters: Filters {
+                allowlist: Filters {
                     types: vec!["^cusparse.*".to_string()],
                     functions: vec!["^cusparse.*".to_string()],
                     vars: vec!["^cusparse.*".to_string()],
                 },
+                blocklist: Filters::none(),
                 libs: vec!["cusparse".to_string()],
                 redist: None,
             },
@@ -200,11 +201,12 @@ fn create_modules() -> Vec<(String, ModuleConfig)> {
             "cusolver".to_string(),
             ModuleConfig {
                 cuda: "libcusolver".to_string(),
-                filters: Filters {
+                allowlist: Filters {
                     types: vec!["^cusolver.*".to_string()],
                     functions: vec!["^cusolver.*".to_string()],
                     vars: vec!["^cusolver.*".to_string()],
                 },
+                blocklist: Filters::none(),
                 libs: vec!["cusolver".to_string()],
                 // redist in cusolver is dummy
                 redist: Some(Redist {
